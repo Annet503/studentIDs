@@ -14,7 +14,7 @@ class StudentProvider {
         val studentList = listOf(
             Student(1, "NAKKU ANNET", "24/2/314/D/011", "BIT", R.drawable.p1, true),
             Student(2, "NANTONGO ZAINAH", "24/2/314/D/511", "BCS", R.drawable.p2, false),
-            Student(3, "NAMAZZI RITAH", "24/2/314/D/502", "BIT", R.drawable.p3, true),
+            Student(3, "NAMAZZI RITAH", "24/2/314/D/012", "BIT", R.drawable.p3, true),
             Student(4, "KASEKENDE ROBERT", "24/2/314/D/023", "BSE", R.drawable.p4, true)
         )
     }
