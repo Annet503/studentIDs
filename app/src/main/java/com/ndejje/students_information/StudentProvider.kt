@@ -15,7 +15,7 @@ class StudentProvider {
             Student(1, "NAKKU ANNET", "24/2/314/D/01", "BIT", R.drawable.p1, true),
             Student(2, "NANTONGO ZAINAH", "24/2/314/D/02", "BCS", R.drawable.p2, false),
             Student(3, "NAMAZZI RITAH", "24/2/314/D/03", "BIT", R.drawable.p3, true),
-            Student(4, "KAMUGISHA ROBERT", "24/2/314/D/04", "BSE", R.drawable.p4, true)
+            Student(4, "KASEKENDE ROBERT", "24/2/314/D/04", "BSE", R.drawable.p4, true)
         )
     }
 }
