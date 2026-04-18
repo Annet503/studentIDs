@@ -10,8 +10,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -111,14 +113,55 @@ fun StudentIdCard(student: Student) {
 
 @Composable
 fun StudentDirectory(modifier: Modifier = Modifier) {
-    val students = StudentProvider.studentList
-    LazyColumn(
-        modifier = modifier.fillMaxSize(),
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-        items(students) { student ->
-            StudentIdCard(student = student)
+    var searchQuery by remember { mutableStateOf("") }
+    
+    val students = remember(searchQuery) {
+        StudentProvider.studentList.filter {
+            it.name.contains(searchQuery, ignoreCase = true) ||
+            it.regNo.contains(searchQuery, ignoreCase = true) ||
+            it.course.contains(searchQuery, ignoreCase = true)
+        }
+    }
+
+    Column(modifier = modifier.fillMaxSize()) {
+        OutlinedTextField(
+            value = searchQuery,
+            onValueChange = { searchQuery = it },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            placeholder = { Text("Search by name, reg no, or course...") },
+            leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search Icon") },
+            shape = RoundedCornerShape(12.dp),
+            singleLine = true,
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = MaterialTheme.colorScheme.surface,
+                unfocusedContainerColor = MaterialTheme.colorScheme.surface
+            )
+        )
+        
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            items(students) { student ->
+                StudentIdCard(student = student)
+            }
+            if (students.isEmpty()) {
+                item {
+                    Box(
+                        modifier = Modifier.fillParentMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "No students found",
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+            }
         }
     }
 }
