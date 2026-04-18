@@ -40,48 +40,46 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun StudentInfo(student: Student) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp)
     ) {
         Image(
             painter = painterResource(id = student.imageRes),
             contentDescription = "Student Photo",
             modifier = Modifier
-                .size(80.dp)
+                .size(100.dp)
                 .clip(CircleShape),
             contentScale = ContentScale.Crop
         )
-        Spacer(modifier = Modifier.width(16.dp))
-        Column {
-            Text(
-                text = student.name,
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold
-            )
-            Text(
-                text = "Reg No: ${student.regNo}",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-            Text(
-                text = "Course: ${student.course}",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-            if (student.isEnrolled) {
-                Surface(
-                    shape = RoundedCornerShape(4.dp),
-                    color = MaterialTheme.colorScheme.primaryContainer,
-                    modifier = Modifier.padding(top = 4.dp)
-                ) {
-                    Text(
-                        text = "Enrolled",
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer
-                    )
-                }
+        Spacer(modifier = Modifier.height(12.dp))
+        Text(
+            text = student.name,
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.Bold
+        )
+        Text(
+            text = "Reg No: ${student.regNo}",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        Text(
+            text = "Course: ${student.course}",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        if (student.isEnrolled) {
+            Surface(
+                shape = RoundedCornerShape(4.dp),
+                color = MaterialTheme.colorScheme.primaryContainer,
+                modifier = Modifier.padding(top = 8.dp)
+            ) {
+                Text(
+                    text = "Enrolled",
+                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                )
             }
         }
     }
